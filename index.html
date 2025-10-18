@@ -11,7 +11,7 @@
 
   <div class="jar-container">
     <h1>💖 The Girls’ Cheer Jar 💖</h1>
-    <p>Type your name to reveal your personal cheer</p>
+    <p>Type your name to reveal your cheer</p>
 
     <input id="nameInput" type="text" placeholder="Enter your name..." />
     <button id="openBtn">Open My Cheer 💌</button>
@@ -19,6 +19,21 @@
     <div id="messageBox" class="hidden">
       <p id="messageText"></p>
       <p id="messageFrom"></p>
+
+      <div id="extraMessages" class="extra-messages"></div>
+
+      <div id="sendPrompt" class="hidden">
+        <p>Would you like to add a message for someone? 💞</p>
+        <button id="addMessageBtn">Yes, I’d love to!</button>
+      </div>
+    </div>
+
+    <div id="addMessageForm" class="hidden add-form">
+      <h3>💌 Send a Cheer</h3>
+      <select id="recipientSelect"></select>
+      <textarea id="messageInput" placeholder="Type your message..."></textarea>
+      <button id="sendBtn">Send Cheer 💗</button>
+      <button id="cancelBtn" class="cancel">Cancel</button>
     </div>
 
     <canvas id="confetti"></canvas>

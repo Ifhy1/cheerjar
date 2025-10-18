@@ -1,4 +1,4 @@
-// List of girls and their sweet messages
+// 🎀 All cheer messages
 const cheers = {
   "tolani": "Our sunshine and safe place in one — you pour love into everyone and still manage to sparkle. The world feels softer with your kind of energy 💖",
   "ify": "You are grace in motion — gentle yet unstoppable. Even when things feel heavy, your heart still knows how to shine.",
@@ -33,6 +33,21 @@ const messageText = document.getElementById("messageText");
 const messageFrom = document.getElementById("messageFrom");
 const confettiCanvas = document.getElementById("confetti");
 const ctx = confettiCanvas.getContext("2d");
+const sendPrompt = document.getElementById("sendPrompt");
+const addForm = document.getElementById("addMessageForm");
+const recipientSelect = document.getElementById("recipientSelect");
+const messageInput = document.getElementById("messageInput");
+const sendBtn = document.getElementById("sendBtn");
+const cancelBtn = document.getElementById("cancelBtn");
+const extraMessages = document.getElementById("extraMessages");
+
+// Fill dropdown with all names
+Object.keys(cheers).forEach(name => {
+  const opt = document.createElement("option");
+  opt.value = name;
+  opt.textContent = capitalize(name);
+  recipientSelect.appendChild(opt);
+});
 
 btn.addEventListener("click", () => {
   const name = nameInput.value.trim().toLowerCase();
@@ -43,6 +58,9 @@ btn.addEventListener("click", () => {
     messageText.textContent = msg;
     messageFrom.textContent = `💌 — ${capitalize(name)}`;
     messageBox.classList.remove("hidden");
+    sendPrompt.classList.remove("hidden");
+
+    showExtraMessages(name);
     throwConfetti();
   } else {
     messageBox.classList.add("hidden");
@@ -50,11 +68,49 @@ btn.addEventListener("click", () => {
   }
 });
 
+// Show send form
+document.getElementById("addMessageBtn").addEventListener("click", () => {
+  addForm.classList.remove("hidden");
+});
+
+// Cancel send
+cancelBtn.addEventListener("click", () => {
+  addForm.classList.add("hidden");
+});
+
+// Save message
+sendBtn.addEventListener("click", () => {
+  const to = recipientSelect.value;
+  const message = messageInput.value.trim();
+  if (!message) return alert("Please type a message!");
+  saveMessage(to, message);
+  messageInput.value = "";
+  addForm.classList.add("hidden");
+  alert("💗 Message sent with love!");
+});
+
+function saveMessage(to, message) {
+  const stored = JSON.parse(localStorage.getItem("cheerMessages") || "{}");
+  if (!stored[to]) stored[to] = [];
+  stored[to].push(message);
+  localStorage.setItem("cheerMessages", JSON.stringify(stored));
+}
+
+function showExtraMessages(name) {
+  const stored = JSON.parse(localStorage.getItem("cheerMessages") || "{}");
+  extraMessages.innerHTML = "";
+  if (stored[name] && stored[name].length > 0) {
+    const div = document.createElement("div");
+    div.innerHTML = `<strong>💬 Someone left you a message:</strong><br><br>${stored[name].map(m => `• ${m}`).join("<br>")}`;
+    extraMessages.appendChild(div);
+  }
+}
+
 function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-/* --- Simple confetti animation --- */
+/* --- Confetti Animation --- */
 function throwConfetti() {
   const colors = ['#ff9cd1','#ffd1dc','#8de0ff','#fff4ff'];
   const confetti = [];
