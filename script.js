@@ -2,7 +2,7 @@
 const cheers = {
   "tolani1": "Our sunshine and safe place in one — you pour love into everyone and still manage to sparkle. The world feels softer with your kind of energy 💖",
   "ifyH": "You are grace in motion — gentle yet unstoppable. Even when things feel heavy, your heart still knows how to shine.",
-  "blessing": "Your name says it all — you walk into rooms and leave peace behind. Never forget that you’re a blessing just by being you.",
+  "blessing7": "Your name says it all — you walk into rooms and leave peace behind. Never forget that you’re a blessing just by being you.",
   "britneyE": "You radiate quiet confidence, lifting others without a word. Keep being the calm and light that you are.",
   "ice queenM": "Even ice glows when it catches the sun — your strength is beautiful, your calm is powerful, and your softness is rare.",
   "nyomi12": "You bloom differently — not loudly, but beautifully. Keep growing at your own pace, and the world will catch up to your rhythm.",
