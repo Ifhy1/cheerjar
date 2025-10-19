@@ -45,23 +45,26 @@ const extraMessages = document.getElementById("extraMessages");
 Object.keys(cheers).forEach(name => {
   const opt = document.createElement("option");
   opt.value = name;
-  opt.textContent = capitalize(name);
+  opt.textContent = name;
   recipientSelect.appendChild(opt);
 });
 
-// 🔮 Reveal cheer
 btn.addEventListener("click", () => {
-  const name = nameInput.value.trim().toLowerCase();
-  if (!name) return;
+  const nameEntered = nameInput.value.trim();
+  if (!nameEntered) return;
 
-  const msg = cheers[name];
-  if (msg) {
-    messageText.textContent = msg;
-    messageFrom.textContent = `💌 — ${capitalize(name)}`;
+  // Case-insensitive search fix ✅
+  const realKey = Object.keys(cheers).find(
+    key => key.toLowerCase() === nameEntered.toLowerCase()
+  );
+
+  if (realKey) {
+    messageText.textContent = cheers[realKey];
+    messageFrom.textContent = `💌 — ${realKey}`;
     messageBox.classList.remove("hidden");
     sendPrompt.classList.remove("hidden");
 
-    showAnonymousCheers(name); // 🌟 NEW FEATURE: shows secret cheers
+    showAnonymousCheers(realKey);
     throwConfetti();
   } else {
     messageBox.classList.add("hidden");
@@ -69,17 +72,12 @@ btn.addEventListener("click", () => {
   }
 });
 
-// Show send form
 document.getElementById("addMessageBtn").addEventListener("click", () => {
   addForm.classList.remove("hidden");
 });
-
-// Cancel send
 cancelBtn.addEventListener("click", () => {
   addForm.classList.add("hidden");
 });
-
-// Save message
 sendBtn.addEventListener("click", () => {
   const to = recipientSelect.value;
   const message = messageInput.value.trim();
@@ -90,21 +88,19 @@ sendBtn.addEventListener("click", () => {
   alert("💗 Message sent with love!");
 });
 
-// Save anonymous message
 function saveMessage(to, message) {
   const stored = JSON.parse(localStorage.getItem("cheerMessages") || "{}");
-  if (!stored[to]) stored[to] = [];
-  stored[to].push(message);
+  const key = to.toLowerCase(); // make sure saving is consistent
+  if (!stored[key]) stored[key] = [];
+  stored[key].push(message);
   localStorage.setItem("cheerMessages", JSON.stringify(stored));
 }
 
-// 🌸 NEW: Anonymous Cheer Reveal
 function showAnonymousCheers(name) {
-  const allMessages = JSON.parse(localStorage.getItem("cheerMessages") || "{}");
-  const userMessages = allMessages[name] || [];
+  const stored = JSON.parse(localStorage.getItem("cheerMessages") || "{}");
+  const userMessages = stored[name.toLowerCase()] || [];
 
-  const extraMessagesDiv = document.getElementById("extraMessages");
-  extraMessagesDiv.innerHTML = "";
+  extraMessages.innerHTML = "";
 
   if (userMessages.length > 0) {
     const revealBox = document.createElement("div");
@@ -113,7 +109,7 @@ function showAnonymousCheers(name) {
       <p>You have ${userMessages.length} secret cheer${userMessages.length > 1 ? "s" : ""} 💌</p>
       <button id="revealBtn">Reveal them</button>
     `;
-    extraMessagesDiv.appendChild(revealBox);
+    extraMessages.appendChild(revealBox);
 
     document.getElementById("revealBtn").addEventListener("click", () => {
       revealBox.innerHTML = `
@@ -124,41 +120,33 @@ function showAnonymousCheers(name) {
   }
 }
 
-// Capitalize function
-function capitalize(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
-/* --- Confetti Animation --- */
 function throwConfetti() {
   const colors = ['#ff9cd1','#ffd1dc','#8de0ff','#fff4ff'];
   const confetti = [];
   const W = confettiCanvas.width = window.innerWidth;
   const H = confettiCanvas.height = window.innerHeight;
-
-  for (let i=0; i<50; i++){
+  for (let i = 0; i < 50; i++) {
     confetti.push({
-      x: Math.random()*W,
-      y: Math.random()*H - H,
-      r: Math.random()*6+4,
-      d: Math.random()*50,
-      color: colors[Math.floor(Math.random()*colors.length)],
-      tilt: Math.random()*10 -10
+      x: Math.random() * W,
+      y: Math.random() * H - H,
+      r: Math.random() * 6 + 4,
+      d: Math.random() * 50,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      tilt: Math.random() * 10 - 10
     });
   }
-
   const draw = () => {
-    ctx.clearRect(0,0,W,H);
-    confetti.forEach((c,i)=>{
+    ctx.clearRect(0, 0, W, H);
+    confetti.forEach((c, i) => {
       ctx.beginPath();
-      ctx.fillStyle=c.color;
-      ctx.fillRect(c.x,c.y,c.r,c.r);
+      ctx.fillStyle = c.color;
+      ctx.fillRect(c.x, c.y, c.r, c.r);
       ctx.closePath();
-      c.y += Math.cos(c.d)+2;
+      c.y += Math.cos(c.d) + 2;
       c.x += Math.sin(0.5);
-      if(c.y>H){
+      if (c.y > H) {
         confetti[i].y = -10;
-        confetti[i].x = Math.random()*W;
+        confetti[i].x = Math.random() * W;
       }
     });
     requestAnimationFrame(draw);
