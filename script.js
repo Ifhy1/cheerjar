@@ -1,29 +1,29 @@
 // 🎀 All cheer messages
 const cheers = {
-  "tolani": "Our sunshine and safe place in one — you pour love into everyone and still manage to sparkle. The world feels softer with your kind of energy 💖",
-  "ify": "You are grace in motion — gentle yet unstoppable. Even when things feel heavy, your heart still knows how to shine.",
+  "tolani1": "Our sunshine and safe place in one — you pour love into everyone and still manage to sparkle. The world feels softer with your kind of energy 💖",
+  "ifyH": "You are grace in motion — gentle yet unstoppable. Even when things feel heavy, your heart still knows how to shine.",
   "blessing": "Your name says it all — you walk into rooms and leave peace behind. Never forget that you’re a blessing just by being you.",
-  "britney": "You radiate quiet confidence, lifting others without a word. Keep being the calm and light that you are.",
-  "ice queen": "Even ice glows when it catches the sun — your strength is beautiful, your calm is powerful, and your softness is rare.",
-  "nyomi": "You bloom differently — not loudly, but beautifully. Keep growing at your own pace, and the world will catch up to your rhythm.",
-  "mimi": "You carry a kind of joy that makes life feel lighter. Don’t dim it, no matter who forgets to say thank you.",
-  "stella ✨": "You’re the sparkle in every dull day — never forget that your laughter is a melody this world needs.",
-  "stella": "You’re made of resilience and glow — you may bend, but you never break, and that’s your quiet magic.",
-  "ejiroghene": "Your presence is warmth, your words are comfort. You don’t just shine — you soothe.",
-  "proudly feminist": "You remind every girl that her voice matters and her dreams are valid. Keep standing tall — you inspire strength in softness.",
-  "oyinlola": "You sweeten every space you’re in — your kindness lingers like honey, and your smile heals.",
-  "eniola": "You may not always see it, but you’re deeply loved and endlessly capable — joy follows wherever you go.",
-  "tinu": "You’re a quiet storm — steady, beautiful, and full of depth. There’s power in your calm.",
-  "lady ann": "Grace and strength wrapped in elegance. You’re proof that soft doesn’t mean weak — it means powerful with peace.",
-  "ayo": "Your name means joy for a reason — you bring it effortlessly. You are the sunshine after every rain.",
-  "oluwabukola": "You’re layered with peace, purpose, and promise. Every challenge is just another chance to bloom brighter.",
-  "missbalogun": "Your energy is rare — full of ambition and warmth. Keep showing the world that gentleness and greatness can coexist.",
-  "moxury": "You’re bold and beautiful — your confidence lights up everyone around you. Keep being your authentic, fearless self.",
-  "gina": "You shine in ways that words can’t capture — soft yet strong, calm yet fierce. You’re everything in perfect balance.",
-  "dera": "You bring quiet healing to those who need it most — your presence alone says, 'everything will be okay.'",
-  "oma": "You have a heart that hugs the world. Even when tired, your spirit still finds ways to love.",
-  "orah_b": "You glow differently — peaceful, calm, and magnetic. The world feels safe when you smile.",
-  "tadtifarta": "You’re art in human form — vibrant, rare, and unapologetically yourself. Never let anyone dull that brilliance."
+  "britneyE": "You radiate quiet confidence, lifting others without a word. Keep being the calm and light that you are.",
+  "ice queenM": "Even ice glows when it catches the sun — your strength is beautiful, your calm is powerful, and your softness is rare.",
+  "nyomi12": "You bloom differently — not loudly, but beautifully. Keep growing at your own pace, and the world will catch up to your rhythm.",
+  "mimiB": "You carry a kind of joy that makes life feel lighter. Don’t dim it, no matter who forgets to say thank you.",
+  "stella ✨S": "You’re the sparkle in every dull day — never forget that your laughter is a melody this world needs.",
+  "stellaU": "You’re made of resilience and glow — you may bend, but you never break, and that’s your quiet magic.",
+  "ejiroghene9": "Your presence is warmth, your words are comfort. You don’t just shine — you soothe.",
+  "proudly feministF": "You remind every girl that her voice matters and her dreams are valid. Keep standing tall — you inspire strength in softness.",
+  "oyinlola0": "You sweeten every space you’re in — your kindness lingers like honey, and your smile heals.",
+  "eniolaC": "You may not always see it, but you’re deeply loved and endlessly capable — joy follows wherever you go.",
+  "tinuX": "You’re a quiet storm — steady, beautiful, and full of depth. There’s power in your calm.",
+  "lady annM": "Grace and strength wrapped in elegance. You’re proof that soft doesn’t mean weak — it means powerful with peace.",
+  "ayoY": "Your name means joy for a reason — you bring it effortlessly. You are the sunshine after every rain.",
+  "oluwabukolaK": "You’re layered with peace, purpose, and promise. Every challenge is just another chance to bloom brighter.",
+  "missbalogunL": "Your energy is rare — full of ambition and warmth. Keep showing the world that gentleness and greatness can coexist.",
+  "moxuryR": "You’re bold and beautiful — your confidence lights up everyone around you. Keep being your authentic, fearless self.",
+  "ginaN": "You shine in ways that words can’t capture — soft yet strong, calm yet fierce. You’re everything in perfect balance.",
+  "dera11": "You bring quiet healing to those who need it most — your presence alone says, 'everything will be okay.'",
+  "oma6": "You have a heart that hugs the world. Even when tired, your spirit still finds ways to love.",
+  "orah_bZ": "You glow differently — peaceful, calm, and magnetic. The world feels safe when you smile.",
+  "tadtifarta4": "You’re art in human form — vibrant, rare, and unapologetically yourself. Never let anyone dull that brilliance."
 };
 
 const btn = document.getElementById("openBtn");
@@ -49,6 +49,7 @@ Object.keys(cheers).forEach(name => {
   recipientSelect.appendChild(opt);
 });
 
+// 🔮 Reveal cheer
 btn.addEventListener("click", () => {
   const name = nameInput.value.trim().toLowerCase();
   if (!name) return;
@@ -60,7 +61,7 @@ btn.addEventListener("click", () => {
     messageBox.classList.remove("hidden");
     sendPrompt.classList.remove("hidden");
 
-    showExtraMessages(name);
+    showAnonymousCheers(name); // 🌟 NEW FEATURE: shows secret cheers
     throwConfetti();
   } else {
     messageBox.classList.add("hidden");
@@ -89,6 +90,7 @@ sendBtn.addEventListener("click", () => {
   alert("💗 Message sent with love!");
 });
 
+// Save anonymous message
 function saveMessage(to, message) {
   const stored = JSON.parse(localStorage.getItem("cheerMessages") || "{}");
   if (!stored[to]) stored[to] = [];
@@ -96,16 +98,33 @@ function saveMessage(to, message) {
   localStorage.setItem("cheerMessages", JSON.stringify(stored));
 }
 
-function showExtraMessages(name) {
-  const stored = JSON.parse(localStorage.getItem("cheerMessages") || "{}");
-  extraMessages.innerHTML = "";
-  if (stored[name] && stored[name].length > 0) {
-    const div = document.createElement("div");
-    div.innerHTML = `<strong>💬 Someone left you a message:</strong><br><br>${stored[name].map(m => `• ${m}`).join("<br>")}`;
-    extraMessages.appendChild(div);
+// 🌸 NEW: Anonymous Cheer Reveal
+function showAnonymousCheers(name) {
+  const allMessages = JSON.parse(localStorage.getItem("cheerMessages") || "{}");
+  const userMessages = allMessages[name] || [];
+
+  const extraMessagesDiv = document.getElementById("extraMessages");
+  extraMessagesDiv.innerHTML = "";
+
+  if (userMessages.length > 0) {
+    const revealBox = document.createElement("div");
+    revealBox.classList.add("reveal-box");
+    revealBox.innerHTML = `
+      <p>You have ${userMessages.length} secret cheer${userMessages.length > 1 ? "s" : ""} 💌</p>
+      <button id="revealBtn">Reveal them</button>
+    `;
+    extraMessagesDiv.appendChild(revealBox);
+
+    document.getElementById("revealBtn").addEventListener("click", () => {
+      revealBox.innerHTML = `
+        <p><strong>Your secret cheer${userMessages.length > 1 ? "s" : ""}:</strong></p>
+        <ul>${userMessages.map(msg => `<li>💖 ${msg}</li>`).join("")}</ul>
+      `;
+    });
   }
 }
 
+// Capitalize function
 function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
