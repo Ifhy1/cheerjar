@@ -1,44 +1,45 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>Girls' Cheer Jar 💌</title>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Girls' Cheer Jar 💌</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <div class="jar-container">
-    <h1>💖 The Girls’ Cheer Jar 💖</h1>
-    <p>Type your name to reveal your cheer</p>
+<div class="jar-container">
+<h1>💖 The Girls’ Cheer Jar 💖</h1>
+<p>Type your name to reveal your cheer</p>
 
-    <input id="nameInput" type="text" placeholder="Enter your name..." />
-    <button id="openBtn">Open My Cheer 💌</button>
+<input id="nameInput" type="text" placeholder="Enter your name..." />
+<button id="openBtn">Open My Cheer 💌</button>
 
-    <div id="messageBox" class="hidden">
-      <p id="messageText"></p>
-      <p id="messageFrom"></p>
+<div id="messageBox" class="hidden">
+<p id="messageText"></p>
+<p id="messageFrom"></p>
 
-      <div id="extraMessages" class="extra-messages"></div>
+<div id="extraMessages" class="extra-messages"></div>
 
-      <div id="sendPrompt" class="hidden">
-        <p>Would you like to add a message for someone? 💞</p>
-        <button id="addMessageBtn">Yes, I’d love to!</button>
-      </div>
-    </div>
+<div id="sendPrompt" class="hidden">
+<p>Would you like to add a message for someone? 💞</p>
+<button id="addMessageBtn">Yes, I’d love to!</button>
+</div>
+</div>
 
-    <div id="addMessageForm" class="hidden add-form">
-      <h3>💌 Send a Cheer</h3>
-      <select id="recipientSelect"></select>
-      <textarea id="messageInput" placeholder="Type your message..."></textarea>
-      <button id="sendBtn">Send Cheer 💗</button>
-      <button id="cancelBtn" class="cancel">Cancel</button>
-    </div>
+<div id="addMessageForm" class="hidden add-form">
+<h3>💌 Send a Cheer</h3>
+<select id="recipientSelect"></select>
+<textarea id="messageInput" placeholder="Type your message..."></textarea>
+<button id="sendBtn">Send Cheer 💗</button>
+<button id="cancelBtn" class="cancel">Cancel</button>
+</div>
 
-    <canvas id="confetti"></canvas>
-  </div>
+<canvas id="confetti"></canvas>
+</div>
 
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
+
